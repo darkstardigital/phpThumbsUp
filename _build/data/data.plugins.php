@@ -25,8 +25,8 @@
  */
 
 return array(
-	array(
-		'name' => 'phpThumbsUp',
-		'file' => 'plugin.phpthumbsup.php'
-	)
+    array(
+        'name' => 'phpThumbsUp',
+        'file' => 'plugin.phpthumbsup.php'
+    )
 );

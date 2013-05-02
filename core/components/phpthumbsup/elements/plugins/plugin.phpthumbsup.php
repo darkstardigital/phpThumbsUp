@@ -13,26 +13,26 @@ $thumbsup = $modx->getService('thumbsup', 'PhpThumbsUp', $path, $scriptPropertie
 
 // make sure model loaded, if not log error and return
 if (!($thumbsup instanceof PhpThumbsUp)) {
-	$modx->log(modX::LOG_LEVEL_ERROR, '[phpThumbsUp] Could not load PhpThumbsUp class.');
-	return NULL;
+    $modx->log(modX::LOG_LEVEL_ERROR, '[phpThumbsUp] Could not load PhpThumbsUp class.');
+    return NULL;
 }
 
 // handle events
 switch ($modx->event->name) {
-	
-	// OnPageNotFound and OnHandleRequest means we need to look for a thumb
-	case 'OnPageNotFound':
-	case 'OnHandleRequest':
-		$thumbsup->process_thumb();
-		break;
-	
-	// OnFileManagerUpload we want to auto create thumbs if specified in settings
-	case 'OnFileManagerUpload':
-		$thumbsup->process_upload($files, $directory);
-		break;
-		
-	// if we didn't match an event just return null
-	default:
-		return NULL;
-	
+
+    // OnPageNotFound and OnHandleRequest means we need to look for a thumb
+    case 'OnPageNotFound':
+    case 'OnHandleRequest':
+        $thumbsup->process_thumb();
+        break;
+
+    // OnFileManagerUpload we want to auto create thumbs if specified in settings
+    case 'OnFileManagerUpload':
+        $thumbsup->process_upload($files, $directory);
+        break;
+
+    // if we didn't match an event just return null
+    default:
+        return NULL;
+
 }

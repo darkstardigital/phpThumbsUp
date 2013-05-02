@@ -19,7 +19,7 @@ $thumbsup = $modx->getService('thumbsup', 'PhpThumbsUp', $path, $scriptPropertie
 
 // make sure we have an image and options
 if (!empty($image) && !empty($options)) {
-	$image = $thumbsup->options_to_path($image, $options);
+    $image = $thumbsup->options_to_path($image, $options);
 }
 
 // return image path

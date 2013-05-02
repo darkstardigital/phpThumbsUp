@@ -23,8 +23,8 @@
  */
 
 return array(
-	array(
-		'name' => 'phpThumbsUp',
-		'file' => 'snippet.phpthumbsup.php'
-	)
+    array(
+        'name' => 'phpThumbsUp',
+        'file' => 'snippet.phpthumbsup.php'
+    )
 );
