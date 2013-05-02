@@ -1,0 +1,5 @@
+Changelog for phpThumbsUp component.
+
+phpThumbsUp 1.0.0
+================================================
+- Initial commit
