@@ -122,14 +122,16 @@ class PhpThumbsUp {
      * outputs the content of the thumb as an image, and exits.
      */
     public function process_thumb() {
-        $url = ltrim($_REQUEST['q'], '/');
-        $base_url = ltrim($this->config['baseUrl'], '/');
-        if (strpos($url, $base_url) === 0) {
-            $options = $this->get_options($url, $base_url);
-            $path = $this->get_thumb_path($options['src'], $url);
-            $this->create_thumb($path, $options);
-            $this->display($path);
-            exit;
+        if (isset($_REQUEST['q'])) {
+            $url = ltrim($_REQUEST['q'], '/');
+            $base_url = ltrim($this->config['baseUrl'], '/');
+            if (strpos($url, $base_url) === 0) {
+                $options = $this->get_options($url, $base_url);
+                $path = $this->get_thumb_path($options['src'], $url);
+                $this->create_thumb($path, $options);
+                $this->display($path);
+                exit;
+            }
         }
     }
 
