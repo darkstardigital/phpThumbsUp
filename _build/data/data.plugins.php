@@ -10,23 +10,33 @@
  *     array(
  *         'name' => 'MyPlugin',
  *         'file' => 'plugin.mysnippet.php',
- *         'events' => 'OnDarkstarIsAwesome:OnAnotherEvent',
  *         'description' => 'This is legit!'
+ *         'events' => array(
+ *              array('event' => 'OnDarkstarIsAwesome', 'priority' => 0, 'propertyset' => 0),
+ *              array('event' => 'OnPatrickIsAwesome', 'priority' => 0, 'propertyset' => 0)
+ *          )
  *     ),
  *     array(
  *         'name' => 'AnotherPlugin',
  *         'file' => 'plugin.anothersnippet.php',
- *         'events' => 'OnDarkstarIsAwesome'
+ *         'events' => array(
+ *              array('event' => 'OnWTF', 'priority' => 0, 'propertyset' => 0)
+ *          )
  *     )
  * );
  *
  * @package phpThumbsUp
- * @subpackate TransportBuilder
+ * @subpackage TransportBuilder
  */
 
 return array(
     array(
         'name' => 'phpThumbsUp',
-        'file' => 'plugin.phpthumbsup.php'
+        'file' => 'plugin.phpthumbsup.php',
+        'events' => array(
+            array('event' => 'OnFileManagerUpload', 'priority' => 0, 'propertyset' => 0),
+            array('event' => 'OnPageNotFound', 'priority' => 0, 'propertyset' => 0),
+            array('event' => 'OnHandleRequest', 'priority' => 0, 'propertyset' => 0)
+        )
     )
 );

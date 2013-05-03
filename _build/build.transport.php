@@ -3,7 +3,7 @@
  * Build script
  *
  * @package phpThumbsUp
- * @subpackate TransportBuilder
+ * @subpackage TransportBuilder
  */
 
 define('PKG_ROOT', dirname(dirname(__FILE__)) . '/');

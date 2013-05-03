@@ -19,7 +19,7 @@
  * );
  *
  * @package phpThumbsUp
- * @subpackate TransportBuilder
+ * @subpackage TransportBuilder
  */
 
 return array(

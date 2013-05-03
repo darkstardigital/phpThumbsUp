@@ -101,11 +101,6 @@ class TransportBuilder {
         $elements = array();
         $snippets = include($this->src['data'] . 'data.snippets.php');
         $plugins = include($this->src['data'] . 'data.plugins.php');
-        $events = array(
-            $this->new_element('modPluginEvent', array('event' => 'OnFileManagerUpload', 'priority' => 0, 'propertyset' => 0)),
-            $this->new_element('modPluginEvent', array('event' => 'OnPageNotFound', 'priority' => 0, 'propertyset' => 0)),
-            $this->new_element('modPluginEvent', array('event' => 'OnHandleRequest', 'priority' => 0, 'propertyset' => 0))
-        );
         $attr = array(
             xPDOTransport::UNIQUE_KEY => 'name',
             xPDOTransport::PRESERVE_KEYS => false,
@@ -133,6 +128,12 @@ class TransportBuilder {
                 'description' => isset($plugin['description']) ? $plugin['description'] : '',
                 'plugincode' => $this->get_element('plugins/' . $plugin['file'])
             );
+            $events = array();
+            if (is_array($plugin['events'])) {
+                foreach ($plugin['events'] as $e) {
+                    $events[] = $this->new_element('modPluginEvent', $e);
+                }
+            }
             $plugin = $this->new_element('modPlugin', $fields, $events);
             $vehicle = $this->builder->createVehicle($plugin, $attr);
             $this->builder->putVehicle($vehicle);

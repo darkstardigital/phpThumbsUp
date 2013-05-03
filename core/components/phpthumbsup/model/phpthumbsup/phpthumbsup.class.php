@@ -23,8 +23,6 @@ class PhpThumbsUp {
         $this->modx = &$modx;
         $base_path = rtrim($this->modx->getOption('base_path', $config, MODX_BASE_PATH), '/') . '/';
         $core_path = rtrim($this->modx->getOption('phpthumbsup.core_path', $config, $this->modx->getOption('core_path') . 'components/phpthumbsup/'), '/') . '/';
-        $assets_path = rtrim($this->modx->getOption('phpthumbsup.assets_path', $config, $this->modx->getOption('assets_path') . 'components/phpthumbsup/'), '/') . '/';
-        $assets_url = rtrim($this->modx->getOption('phpthumbsup.assets_url', $config, $this->modx->getOption('assets_url') . 'components/phpthumbsup/'), '/') . '/';
         $cache_path = rtrim($this->modx->getOption('phpthumbsup.cache_path', $config, $core_path . 'cache/'), '/') . '/';
         $base_url = rtrim($this->modx->getOption('phpthumbsup.base_url', $config, 'phpthumbsup/'), '/') . '/';
         $auto_create = $this->modx->getOption('phpthumbsup.auto_create', $config, '');
@@ -33,11 +31,8 @@ class PhpThumbsUp {
             'basePath' => $base_path,
             'corePath' => $core_path,
             'modelPath' => $core_path . 'model/',
-            'assetsPath' => $assets_path,
-            'assetsUrl' => $assets_url,
             'cachePath' => $cache_path,
             'baseUrl' => $base_url,
-            'connectorUrl' => $assets_url . 'connector.php',
             'autoCreate' => $auto_create,
             'clearCache' => $clear_cache
         ), $config);

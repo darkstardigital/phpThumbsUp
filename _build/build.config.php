@@ -3,7 +3,7 @@
  * Define globals for build script
  *
  * @package phpThumbsUp
- * @subpackate TransportBuilder
+ * @subpackage TransportBuilder
  */
 
 // modx config
