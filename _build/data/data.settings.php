@@ -30,14 +30,14 @@
 return array(
     array(
         'key' => 'phpthumbsup.core_path',
-        'value' => '',
+        'value' => '{core_path}components/phpthumbsup/',
         'xtype' => 'textfield',
         'namespace' => 'phpthumbsup',
         'area' => 'paths'
     ),
     array(
         'key' => 'phpthumbsup.cache_path',
-        'value' => '',
+        'value' => '{core_path}components/phpthumbsup/cache/',
         'xtype' => 'textfield',
         'namespace' => 'phpthumbsup',
         'area' => 'paths'
