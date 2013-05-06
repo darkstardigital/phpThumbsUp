@@ -50,6 +50,8 @@ class PhpThumbsUp {
      */
     public function options_to_path($image, $options) {
         $path = rtrim($this->config['baseUrl'], '/');
+        $options = explode('&', $options);
+        array_walk($options, array($this, 'encode_url'));
         foreach ($options as $opt) {
             if (substr($opt, 0, 4) == 'src/') {
                 $image = substr($opt, 4);
@@ -142,6 +144,7 @@ class PhpThumbsUp {
         $options = array();
         $thumb_args = explode('/src/', trim(substr($url, strlen($base_url)), '/'));
         $option_args = explode('/', $thumb_args[0]);
+        array_walk($options_args, array($this, 'decode_url'));
         for ($i = 0, $j = count($option_args) - 1;  $i < $j; $i += 2) {
             if (preg_match('/(.+)\[\]$/', $option_args[$i], $m)) {
                 if (!isset($options[$m[1]])) {
@@ -154,6 +157,27 @@ class PhpThumbsUp {
         }
         $options['src'] = $thumb_args[1];
         return $options;
+    }
+
+
+    /**
+     * method passed to array walk to urldecode() each element
+     *
+     * @param string $val reference to array element
+     */
+    protected function decode_url(&$val) {
+        $val = urldecode($val);
+    }
+
+
+    /**
+     * method passed to array walk to urlencode() each element
+     *
+     * @param string $val reference to array element
+     */
+    protected function encode_url(&$val) {
+        list($n, $v) = explode('=', $val);
+        $val = urlencode($n) . '/' . urlencode($v);
     }
 
 

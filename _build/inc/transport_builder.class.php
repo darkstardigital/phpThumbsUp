@@ -192,8 +192,8 @@ class TransportBuilder {
     /**
      * Creates a modX element and returns it.
      *
-     * @param $type a modX object
-     * @param $fields the fields passed to fromArray()
+     * @param string $type a modX object
+     * @param array $fields the fields passed to fromArray()
      * @param array $related an array of related modX object
      * @param bool $many use addMany or addOne?
      * @return mixed a modX object specified in $type
@@ -218,7 +218,7 @@ class TransportBuilder {
     /**
      * Returns the contents of a file for a snippet or plugin after stripping the <?php ?> tags.
      *
-     * @param $path path to element file relative to $this->src['elements']
+     * @param string $path path to element file relative to $this->src['elements']
      * @return string contents of the file
      */
     private function get_element($path) {
@@ -247,8 +247,8 @@ class TransportBuilder {
     /**
      * Wrapper for modX->log() because I'm sick of typing modX::LOG_LEVEL_INFO over and over.
      *
-     * @param $msg the msg to print
-     * @param $level a modX::LOG_LEVEL_* const
+     * @param string $msg the msg to print
+     * @param modX::Constant $level a modX::LOG_LEVEL_* const
      */
     private function log($msg, $level = modX::LOG_LEVEL_INFO) {
         $this->modx->log($level, $msg);

@@ -10,7 +10,6 @@
 // input
 $image = !empty($input) ? trim($input) : '';
 $options = !empty($options) ? trim($options) : '';
-$options = explode('&', str_replace('=', '/', $options));
 
 // path to model
 $default_path = $modx->getOption('core_path') . 'components/phpthumbsup/';
