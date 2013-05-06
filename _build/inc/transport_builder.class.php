@@ -106,6 +106,11 @@ class TransportBuilder {
 
         // create settings, add them to a vehicle, and put it to builder
         $settings = $this->create_settings();
+        $attr = array(
+            xPDOTransport::UNIQUE_KEY => 'key',
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => false
+        );
         foreach ($settings as $setting) {
             $vehicle = $this->builder->createVehicle($setting, $attr);
             $this->builder->putVehicle($vehicle);
