@@ -209,7 +209,7 @@ class PhpThumbsUp {
      * @return bool
      */
     protected function check_if_exists($file, $src) {
-        $src = $this->options['basePath'] . $src;
+        $src = $this->config['basePath'] . $src;
         if (file_exists($file)) {
             if (filemtime($file) >= filemtime($src)) {
                 return true;
