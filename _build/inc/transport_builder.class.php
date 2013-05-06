@@ -185,7 +185,7 @@ class TransportBuilder {
         $settings = include($this->src['data'] . 'data.settings.php');
         foreach ($settings as $setting) {
             $fields = array_merge($default, $setting);
-            $elements[] = $this->new_element('modSetting', $fields);
+            $elements[] = $this->new_element('modSystemSetting', $fields);
         }
         return $elements;
     }
