@@ -140,19 +140,6 @@ class TransportBuilder {
         $elements = array();
         $snippets = include($this->src['data'] . 'data.snippets.php');
         $plugins = include($this->src['data'] . 'data.plugins.php');
-        $attr = array(
-            xPDOTransport::UNIQUE_KEY => 'name',
-            xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UPDATE_OBJECT => true,
-            xPDOTransport::RELATED_OBJECTS => true,
-            xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-                'PluginEvents' => array(
-                    xPDOTransport::PRESERVE_KEYS => true,
-                    xPDOTransport::UPDATE_OBJECT => false,
-                    xPDOTransport::UNIQUE_KEY => array('pluginid','event')
-                )
-            )
-        );
         foreach ($snippets as $snippet) {
             $fields = array(
                 'name' => $snippet['name'],
@@ -174,8 +161,6 @@ class TransportBuilder {
                 }
             }
             $plugin = $this->new_element('modPlugin', $fields, $events);
-            //$vehicle = $this->builder->createVehicle($plugin, $attr);
-            //$this->builder->putVehicle($vehicle);
             $elements[] = $plugin;
         }
         return $elements;
