@@ -143,7 +143,14 @@ class PhpThumbsUp {
         $thumb_args = explode('/src/', trim(substr($url, strlen($base_url)), '/'));
         $option_args = explode('/', $thumb_args[0]);
         for ($i = 0, $j = count($option_args) - 1;  $i < $j; $i += 2) {
-            $options[$option_args[$i]] = $option_args[$i + 1];
+            if (preg_match('/(.+)\[\]$/', $option_args[$i], $m)) {
+                if (!isset($options[$m[1]])) {
+                    $options[$m[1]] = array();
+                }
+                $options[$m[1]][] = $option_args[$i + 1];
+            } else {
+                $options[$option_args[$i]] = $option_args[$i + 1];
+            }
         }
         $options['src'] = $thumb_args[1];
         return $options;
