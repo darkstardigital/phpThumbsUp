@@ -3,7 +3,7 @@
  * Array of settings to be installed with package.
  *
  * Returns an array of meta information for setting for the package. Each setting
- * should be an array containing 'name', 'file', 'events', and 'description' (optional).
+ * should be an array containing 'key', 'value', 'xtype', 'namespace', and 'area'.
  *
  * Example:
  * return array(
@@ -11,13 +11,15 @@
  *         'key' => 'packagename.setting_name',
  *         'value' => '',
  *         'xtype' => 'textfield',
- *         'namespace' => 'packagename'
+ *         'namespace' => 'packagename',
+ *         'area' => 'general'
  *     ),
  *     array(
  *         'key' => 'packagename.setting2_name',
  *         'value' => 'myValue',
  *         'xtype' => 'textfield',
- *         'namespace' => 'packagename'
+ *         'namespace' => 'packagename',
+ *         'area' => 'general'
  *     )
  * );
  *
