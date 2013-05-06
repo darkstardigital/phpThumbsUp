@@ -26,7 +26,7 @@ class PhpThumbsUp {
         $cache_path = rtrim($this->modx->getOption('phpthumbsup.cache_path', $config, $core_path . 'cache/'), '/') . '/';
         $base_url = rtrim($this->modx->getOption('phpthumbsup.base_url', $config, 'phpthumbsup/'), '/') . '/';
         $auto_create = $this->modx->getOption('phpthumbsup.auto_create', $config, '');
-        $clear_cache = ($this->modx->getOption('phpthumbsup.clear_cache', $config, false) ? true : false);
+        $clear_cache = ($this->modx->getOption('phpthumbsup.clear_cache', $config, true) ? true : false);
         $this->config = array_merge(array(
             'basePath' => $base_path,
             'corePath' => $core_path,
@@ -69,7 +69,9 @@ class PhpThumbsUp {
      * @param bool $force set to true to ignore phpthumbsup.clear_cache setting
      */
     public function clear_cache($force = false) {
+        $this->modx->log(modX::LOG_LEVEL_ERROR, 'Clear cache fired');
         if ($force || $this->config['clearCache']) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Clear cache started');
             foreach (scandir($this->config['cachePath']) as $file) {
                 if ($file != '.' && $file != '..') {
                     unlink($this->config['cachePath'] . $file);
