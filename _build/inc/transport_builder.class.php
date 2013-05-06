@@ -174,8 +174,8 @@ class TransportBuilder {
                 }
             }
             $plugin = $this->new_element('modPlugin', $fields, $events);
-            $vehicle = $this->builder->createVehicle($plugin, $attr);
-            $this->builder->putVehicle($vehicle);
+            //$vehicle = $this->builder->createVehicle($plugin, $attr);
+            //$this->builder->putVehicle($vehicle);
             $elements[] = $plugin;
         }
         return $elements;
