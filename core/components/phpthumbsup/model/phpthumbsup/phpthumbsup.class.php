@@ -144,7 +144,9 @@ class PhpThumbsUp {
         $options = array();
         $thumb_args = explode('/src/', trim(substr($url, strlen($base_url)), '/'));
         $option_args = explode('/', $thumb_args[0]);
-        array_walk($options_args, array($this, 'decode_url'));
+		// since we're coming from $_REQUEST or an already decoded url specified by the user,
+		// we don't need to decode again (could cause security concerns)
+        //array_walk($options_args, array($this, 'decode_url'));
         for ($i = 0, $j = count($option_args) - 1;  $i < $j; $i += 2) {
             if (preg_match('/(.+)\[\]$/', $option_args[$i], $m)) {
                 if (!isset($options[$m[1]])) {
