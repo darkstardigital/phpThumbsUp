@@ -20,11 +20,6 @@ if (!($thumbsup instanceof PhpThumbsUp)) {
 // handle events
 switch ($modx->event->name) {
 
-    // OnCacheUpdate delete phpthumbsup cache
-    case 'OnCacheUpdate':
-        $thumbsup->clear_cache();
-        break;
-
     // OnFileManagerUpload we want to auto create thumbs if specified in settings
     case 'OnFileManagerUpload':
         $thumbsup->process_upload($files, $directory);
@@ -34,6 +29,11 @@ switch ($modx->event->name) {
     case 'OnHandleRequest':
     case 'OnPageNotFound':
         $thumbsup->process_thumb();
+        break;
+
+    // OnSiteRefresh delete phpthumbsup cache
+    case 'OnSiteRefresh':
+        $thumbsup->clear_cache();
         break;
 
     // if we didn't match an event just return null

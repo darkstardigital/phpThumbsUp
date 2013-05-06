@@ -69,9 +69,7 @@ class PhpThumbsUp {
      * @param bool $force set to true to ignore phpthumbsup.clear_cache setting
      */
     public function clear_cache($force = false) {
-        $this->modx->log(modX::LOG_LEVEL_ERROR, 'Clear cache fired');
         if ($force || $this->config['clearCache']) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Clear cache started');
             foreach (scandir($this->config['cachePath']) as $file) {
                 if ($file != '.' && $file != '..') {
                     unlink($this->config['cachePath'] . $file);

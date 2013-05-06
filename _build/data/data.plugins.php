@@ -34,10 +34,10 @@ return array(
         'name' => 'phpThumbsUp',
         'file' => 'plugin.phpthumbsup.php',
         'events' => array(
-            array('event' => 'OnCacheUpdate', 'priority' => 0, 'propertyset' => 0),
             array('event' => 'OnFileManagerUpload', 'priority' => 0, 'propertyset' => 0),
             //array('event' => 'OnHandleRequest', 'priority' => 0, 'propertyset' => 0),
-            array('event' => 'OnPageNotFound', 'priority' => 0, 'propertyset' => 0)
+            array('event' => 'OnPageNotFound', 'priority' => 0, 'propertyset' => 0),
+            array('event' => 'OnSiteRefresh', 'priority' => 0, 'propertyset' => 0)
         )
     )
 );
