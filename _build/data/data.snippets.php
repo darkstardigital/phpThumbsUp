@@ -8,9 +8,9 @@
  * Example:
  * return array(
  *     array(
- *         'name' => 'MySnippet',
- *         'file' => 'snippet.mysnippet.php',
- *         'description' => 'This is legit!'
+ *         'name' => 'ChuckNorris',
+ *         'file' => 'snippet.chucknorris.php',
+ *         'description' => 'Divides the input by 0.'
  *     ),
  *     array(
  *         'name' => 'AnotherSnippet',

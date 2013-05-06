@@ -9,18 +9,18 @@
  * return array(
  *     array(
  *         'name' => 'MyPlugin',
- *         'file' => 'plugin.mysnippet.php',
- *         'description' => 'This is legit!'
+ *         'file' => 'plugin.myplugin.php',
+ *         'description' => 'This is my plugin'
  *         'events' => array(
- *              array('event' => 'OnDarkstarIsAwesome', 'priority' => 0, 'propertyset' => 0),
- *              array('event' => 'OnPatrickIsAwesome', 'priority' => 0, 'propertyset' => 0)
+ *              array('event' => 'OnPageNotFound', 'priority' => 0, 'propertyset' => 0),
+ *              array('event' => 'OnSiteRefresh', 'priority' => 0, 'propertyset' => 0)
  *          )
  *     ),
  *     array(
  *         'name' => 'AnotherPlugin',
- *         'file' => 'plugin.anothersnippet.php',
+ *         'file' => 'plugin.anotherplugin.php',
  *         'events' => array(
- *              array('event' => 'OnWTF', 'priority' => 0, 'propertyset' => 0)
+ *              array('event' => 'OnHandleRequest', 'priority' => 0, 'propertyset' => 0)
  *          )
  *     )
  * );
