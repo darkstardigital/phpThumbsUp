@@ -67,14 +67,14 @@ class TransportBuilder {
                     xPDOTransport::PRESERVE_KEYS => false,
                     xPDOTransport::UPDATE_OBJECT => true,
                     xPDOTransport::UNIQUE_KEY => 'name',
-                    xPDOTransport::RELATED_OBJECTS => true,
+                    /*xPDOTransport::RELATED_OBJECTS => true,
                     xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
                         'PluginEvents' => array(
                             xPDOTransport::PRESERVE_KEYS => false,
                             xPDOTransport::UPDATE_OBJECT => true,
                             xPDOTransport::UNIQUE_KEY => array('pluginid', 'event')
                         )
-                    )
+                    )*/
                 )
             )
         );
