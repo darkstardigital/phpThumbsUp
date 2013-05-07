@@ -150,7 +150,7 @@ class PhpThumbsUp {
         //
         // UPDATE: we need to use $_SERVER['REQUEST_URI'] and manually decode in case a filter
         //         contains a "/" in it, as we have to explode before urldecode
-        array_walk($options_args, array($this, 'decode_url'));
+        array_walk($option_args, array($this, 'decode_url'));
         for ($i = 0, $j = count($option_args) - 1;  $i < $j; $i += 2) {
             // if a filter name ends with [] it is an array
             if (preg_match('/(.+)\[\]$/', $option_args[$i], $m)) {
