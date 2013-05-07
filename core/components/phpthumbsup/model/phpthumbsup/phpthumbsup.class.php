@@ -27,8 +27,8 @@ class PhpThumbsUp {
         $base_url = rtrim($this->modx->getOption('phpthumbsup.base_url', $config, 'phpthumbsup/'), '/') . '/';
         $auto_create = $this->modx->getOption('phpthumbsup.auto_create', $config, '');
         $clear_cache = ($this->modx->getOption('phpthumbsup.clear_cache', $config, true) ? true : false);
-		$available_options = explode(',', $this->modx->getOption('phpthumbsup.available_options', $config, ''));
-		$available_filters = explode(',', $this->modx->getOption('phpthumbsup.available_filters', $config, ''));
+		$available_options = explode(',', trim($this->modx->getOption('phpthumbsup.available_options', $config, ''), ','));
+		$available_filters = explode(',', trim($this->modx->getOption('phpthumbsup.available_filters', $config, ''), ','));
         $this->config = array_merge(array(
             'basePath' => $base_path,
             'corePath' => $core_path,
@@ -106,7 +106,7 @@ class PhpThumbsUp {
                         //move_uploaded_file($file['tmp_name'], MODX_CORE_PATH . "$upload_dir/$file[name]");
                         $url = "/$base_url/$options_url/src/$upload_dir/$file[name]";
                         $options = $this->get_options($url, $base_url);
-                        $thumb_path = $this->get_thumb_path($options['src'], $url);
+                        $thumb_path = $this->get_thumb_path($options);
                         $this->create_thumb($thumb_path, $options);
                     }
                 }
@@ -128,7 +128,7 @@ class PhpThumbsUp {
             $base_url = ltrim($this->config['baseUrl'], '/');
             if (strpos($url, $base_url) === 0) {
                 $options = $this->get_options($url, $base_url);
-                $path = $this->get_thumb_path($options['src'], $url);
+                $path = $this->get_thumb_path($options);
                 $this->create_thumb($path, $options);
                 $this->display($path);
                 exit;
@@ -196,19 +196,43 @@ class PhpThumbsUp {
     /**
      * Returns the path to the thumbnail for the phpThumbsUp url provided.
      *
-     * @param string $path relative url for source image
-     * @param string $url a phpThumbsUp url for a thumbnail
+     * @param array $options key/value modPhpThumb options
      * @return string absolute path to the thumbnail
      */
-    protected function get_thumb_path($path, $url) {
-        $filename = basename($path);
+    protected function get_thumb_path($options) {
+        $filename = basename($options['src']);
         $ext = '';
         if (preg_match('/(.+)(\.[^.]+)$/', $filename, $m)) {
             $filename = $m[1];
             $ext = $m[2];
         }
-        $file = $this->config['cachePath'] . $filename . '.' . md5($url) . $ext;
+        $file = $this->config['cachePath'] . $filename . '.' . md5($this->options_to_string($options)) . $ext;
         return $file;
+    }
+
+
+    /**
+     * Returns options array as a string separated by slashes.
+     *
+     * Use this to generate a unique md5 hash for each thumb based on the src path and options. Sorts
+     * the options so a different file will not get created if the options are the same but in a different
+     * order.
+     *
+     * @param $options
+     * @return string
+     */
+    protected function options_to_string($options) {
+        ksort($options);
+        $str = '';
+        foreach ($options as $k => $v) {
+            $str .= '/' . $k;
+            if (is_array($v)) {
+                $str .= $this->options_to_string($v);
+            } else {
+                $str .= '/' . $v;
+            }
+        }
+        return $str;
     }
 
 
@@ -301,7 +325,7 @@ class PhpThumbsUp {
         readfile($file);
     }
 
-	/***
+	/**
 	 * Make sure the given option is available
 	 *
 	 * @param $option
