@@ -120,7 +120,8 @@ class PhpThumbsUp {
      */
     public function process_thumb() {
         if (isset($_REQUEST['q'])) {
-            $url = ltrim($_REQUEST['q'], '/');
+            //$url = ltrim($_REQUEST['q'], '/');
+            $url = ltrim($_SERVER['REQUEST_URI'], '/');
             $base_url = ltrim($this->config['baseUrl'], '/');
             if (strpos($url, $base_url) === 0) {
                 $options = $this->get_options($url, $base_url);
@@ -146,7 +147,10 @@ class PhpThumbsUp {
         $option_args = explode('/', $thumb_args[0]);
 		// since we're coming from $_REQUEST or an already decoded url specified by the user,
 		// we don't need to decode again (could cause security concerns)
-        //array_walk($options_args, array($this, 'decode_url'));
+        //
+        // UPDATE: we need to use $_SERVER['REQUEST_URI'] and manually decode in case a filter
+        //         contains a "/" in it, as we have to explode before urldecode
+        array_walk($options_args, array($this, 'decode_url'));
         for ($i = 0, $j = count($option_args) - 1;  $i < $j; $i += 2) {
             // if a filter name ends with [] it is an array
             if (preg_match('/(.+)\[\]$/', $option_args[$i], $m)) {
