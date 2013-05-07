@@ -27,6 +27,8 @@ class PhpThumbsUp {
         $base_url = rtrim($this->modx->getOption('phpthumbsup.base_url', $config, 'phpthumbsup/'), '/') . '/';
         $auto_create = $this->modx->getOption('phpthumbsup.auto_create', $config, '');
         $clear_cache = ($this->modx->getOption('phpthumbsup.clear_cache', $config, true) ? true : false);
+		$available_options = explode(',', $this->modx->getOption('phpthumbsup.available_options', $config, ''));
+		$available_filters = explode(',', $this->modx->getOption('phpthumbsup.available_filters', $config, ''));
         $this->config = array_merge(array(
             'basePath' => $base_path,
             'corePath' => $core_path,
@@ -34,7 +36,9 @@ class PhpThumbsUp {
             'cachePath' => $cache_path,
             'baseUrl' => $base_url,
             'autoCreate' => $auto_create,
-            'clearCache' => $clear_cache
+            'clearCache' => $clear_cache,
+			'available_options' => $available_options,
+			'available_filters' => $available_filters
         ), $config);
     }
 
@@ -55,8 +59,7 @@ class PhpThumbsUp {
         foreach ($options as $opt) {
             if (substr($opt, 0, 4) == 'src/') {
                 $image = substr($opt, 4);
-            }
-            else {
+            } else {
                 $path .= "/$opt";
             }
         }
@@ -154,11 +157,13 @@ class PhpThumbsUp {
         for ($i = 0, $j = count($option_args) - 1;  $i < $j; $i += 2) {
             // if a filter name ends with [] it is an array
             if (preg_match('/(.+)\[\]$/', $option_args[$i], $m)) {
-                if (!isset($options[$m[1]])) {
-                    $options[$m[1]] = array();
-                }
-                $options[$m[1]][] = $option_args[$i + 1];
-            } else {
+				if ($this->is_available_option($m[1], $option_args[$i + 1])) {
+					if (!isset($options[$m[1]])) {
+						$options[$m[1]] = array();
+					}
+					$options[$m[1]][] = $option_args[$i + 1];
+				}
+            } else if ($this->is_available_option($option_args[$i], $option_args[$i + 1])) {
                 $options[$option_args[$i]] = $option_args[$i + 1];
             }
         }
@@ -295,5 +300,23 @@ class PhpThumbsUp {
         header('Content-Length: ' . filesize($file));
         readfile($file);
     }
+
+	/***
+	 * Make sure the given option is available
+	 *
+	 * @param $option
+	 * @param $value
+	 * @return bool
+	 */
+	protected function is_available_option($option, $value) {
+		if (in_array($option, $this->config['available_options'])) {
+			if ($option === 'fltr') {
+				$filter = explode('|', $value);
+				return count($filter) > 0 && in_array($filter[0], $this->config['available_filter']);
+			}
+			return true;
+		}
+		return false;
+	}
 
 }
