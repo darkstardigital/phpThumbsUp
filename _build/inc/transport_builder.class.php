@@ -124,7 +124,7 @@ class TransportBuilder {
             $this->builder->putVehicle($vehicle);
         }
 
-        // add docs (license, readme, etc) and pack the package (we done yo!)
+        // add docs (license, readme, etc) and pack the package
         $this->builder->setPackageAttributes($this->pkg_attributes());
         $this->builder->pack();
     }

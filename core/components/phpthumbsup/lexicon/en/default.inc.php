@@ -3,6 +3,8 @@
  * English language file for phpThumbsUp.
  *
  * @package phpThumbsUp
+ * @subpackage lexicon
+ * @language en
  */
 
 $_lang['setting_phpthumbsup.core_path'] = 'Core Path';
