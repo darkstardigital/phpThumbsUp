@@ -1,6 +1,6 @@
 <?php
 /**
- * Language file for phpThumbsUp.
+ * English language file for phpThumbsUp.
  *
  * @package phpThumbsUp
  */
