@@ -312,7 +312,7 @@ class PhpThumbsUp {
 		if (in_array($option, $this->config['available_options'])) {
 			if ($option === 'fltr') {
 				$filter = explode('|', $value);
-				return count($filter) > 0 && in_array($filter[0], $this->config['available_filter']);
+				return count($filter) > 0 && in_array($filter[0], $this->config['available_filters']);
 			}
 			return true;
 		}
