@@ -55,8 +55,6 @@ A quick example:
 mysite.com/phpthumbsup/w/400/h/300/zc/1/src/path/to/image.jpg
          [1. base_url][   2. filters   ]   [  3. image url   ]
 
-Let's break down this example:
-
 1. /phpthumbsup is how we know this is a thumbnail. This is required at the
    beginning of every thumbnail
 2. /w/400/h/300/zc/1 are the filters passed to modPhpThumb
@@ -79,7 +77,7 @@ page is rendered. To enable this, you simply need to define filters and paths
 in the system settings phpthumbsup.auto_create using a phpThumbsUp URL.
 Separate multiple directories with a colon.
 
-Example (notice you don't include the /phpthumbsup part at the beginning):
+Example (notice you DO NOT include the /phpthumbsup part at the beginning):
 
 /w/400/h/300/zc/1/src/path/to/dir:/w/800/src/path/to/dir
 
@@ -96,10 +94,10 @@ a general rule, DO NOT edit the path settings unless you are an advanced user
 of MODX and have a customized installation.
 
 * phpthumbsup.auto_create - colon separated list of directories using
-  phpThumbsUp URL format
-* phpthumbsup.base_url - the first part of phpThumbsUp URL (default:
-  phpthumbsup/)
+                            phpThumbsUp URL format
+* phpthumbsup.base_url    - the first part of phpThumbsUp URL (default:
+                            phpthumbsup/)
 * phpthumbsup.clear_cache - should thumbnail cache be cleared when site cache
-  is cleared? (default: yes)
-* phpthumbsup.cache_path - the path to the phpThumbsUp cache
-* phpthumbsup.core_path - the core path to phpThumbsUp
+                            is cleared? (default: yes)
+* phpthumbsup.cache_path  - the path to the phpThumbsUp cache
+* phpthumbsup.core_path   - the core path to phpThumbsUp

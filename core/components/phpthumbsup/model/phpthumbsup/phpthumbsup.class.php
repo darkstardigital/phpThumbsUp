@@ -148,6 +148,7 @@ class PhpThumbsUp {
 		// we don't need to decode again (could cause security concerns)
         //array_walk($options_args, array($this, 'decode_url'));
         for ($i = 0, $j = count($option_args) - 1;  $i < $j; $i += 2) {
+            // if a filter name ends with [] it is an array
             if (preg_match('/(.+)\[\]$/', $option_args[$i], $m)) {
                 if (!isset($options[$m[1]])) {
                     $options[$m[1]] = array();
