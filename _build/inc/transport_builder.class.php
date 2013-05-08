@@ -59,8 +59,6 @@ class TransportBuilder {
      * The main method for making the package. Instantiate TransportBuilder, call make(), and call it a day :)
      */
     public function make() {
-        $this->log('Running TransportBuilder::make()...');
-
         // create category for package
         $cat = $this->modx->newObject('modCategory');
         $cat->set('id', 0);
@@ -131,8 +129,6 @@ class TransportBuilder {
         // add docs (license, readme, etc) and pack the package
         $this->builder->setPackageAttributes($this->pkg_attributes());
         $this->builder->pack();
-
-        $this->log('TransportBuilder::make() finished.');
     }
 
 

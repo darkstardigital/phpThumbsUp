@@ -24,7 +24,7 @@
 
 return array(
     array(
-        'name' => 'phpThumbsUp',
+        'name' => 'phpthumbsup',
         'file' => 'snippet.phpthumbsup.php'
     )
 );
