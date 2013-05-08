@@ -4,12 +4,12 @@ Extra: phpThumbsUp
 Version: 1.0.0
 Developed By: Darkstar Design (info@darkstardesign.com)
 
-An alternative to the popular phpThumbOf snippet for creating dynamic
-thumbnails of images in MODX.
-
-phpThumbsUp is an alternative to phpThumbOf with several key differences. The
-snippet uses the exact same syntax as phpThumbOf, so you can simply replace
-your :phpThumbOf=`...` calls with :phpThumbsUp=`...`
+phpThumbsUp is a MODX addon that manipulates source images to create thumbnails.
+You can use phpThumbsUp to create thumbnails images for galleries, automatically
+size user-uploaded images for mobile devices, or automatically add complex image
+filters to photos. It's based on the popular phpThumbOf package, with a few
+key differences. The snippet uses the exact same syntax as phpThumbOf, so you
+can simply replace your :phpThumbOf=`...` calls with :phpThumbsUp=`...`
 
 
 ----------------------

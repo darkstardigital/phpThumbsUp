@@ -33,48 +33,48 @@ return array(
         'value' => '{core_path}components/phpthumbsup/',
         'xtype' => 'textfield',
         'namespace' => 'phpthumbsup',
-        'area' => 'paths'
+        'area' => 'area_paths'
     ),
     array(
         'key' => 'phpthumbsup.cache_path',
         'value' => '{core_path}components/phpthumbsup/cache/',
         'xtype' => 'textfield',
         'namespace' => 'phpthumbsup',
-        'area' => 'paths'
+        'area' => 'area_paths'
     ),
     array(
         'key' => 'phpthumbsup.base_url',
         'value' => 'phpthumbsup/',
         'xtype' => 'textfield',
         'namespace' => 'phpthumbsup',
-        'area' => 'general'
+        'area' => 'area_general'
     ),
     array(
         'key' => 'phpthumbsup.auto_create',
         'value' => '',
         'xtype' => 'textfield',
         'namespace' => 'phpthumbsup',
-        'area' => 'general'
+        'area' => 'area_general'
     ),
     array(
 		'key' => 'phpthumbsup.clear_cache',
 		'value' => true,
 		'xtype' => 'combo-boolean',
 		'namespace' => 'phpthumbsup',
-		'area' => 'general'
+		'area' => 'area_general'
 	),
 	array(
 		'key' => 'phpthumbsup.available_options',
 		'value' => 'w,h,wp,hp,wl,hl,ws,hs,f,q,sx,sy,sw,sh,zc,bg,bc,fltr,xto,ra,ar,sfn,aoe,iar,far,dpi,maxb',
 		'xtype' => 'textfield',
 		'namespace' => 'phpthumbsup',
-		'area' => 'general'
+		'area' => 'area_general'
 	),
 	array(
 		'key' => 'phpthumbsup.available_filters',
 		'value' => 'brit,cont,gam,sat,ds,gray,th,rcd,clr,sep,usm,blur,sblr,smth,lvl,wb,hist,flip,ric,elip,bvl,bord,fram,drop,crop,rot,size,stc',
 		'xtype' => 'textfield',
 		'namespace' => 'phpthumbsup',
-		'area' => 'general'
+		'area' => 'area_general'
 	)
 );
