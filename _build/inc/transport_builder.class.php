@@ -6,9 +6,9 @@
  * plugins, and settings defined in the data directory. The theory to this class is that you don't have to keep
  * writing the same build.transport.php script over and over for every package.
  *
- * It does make some assumptions you should be aware of. A category based on the package namespace (defined in
- * build.config.php) and adds all plugins/snippets to this category. If you want snippets or plugins to be custom
- * categories this class won't work for you.
+ * It does make some assumptions you should be aware of. A category is created based on the package namespace (defined
+ * in build.config.php) and all plugins/snippets are added to this category. If you want snippets or plugins to be in
+ * custom categories this class won't work for you.
  *
  * @author Darkstar Design (info@darkstardesign.com)
  * @package phpThumbsUp
@@ -59,6 +59,8 @@ class TransportBuilder {
      * The main method for making the package. Instantiate TransportBuilder, call make(), and call it a day :)
      */
     public function make() {
+        $this->log('Running TransportBuilder::make()...');
+
         // create category for package
         $cat = $this->modx->newObject('modCategory');
         $cat->set('id', 0);
@@ -68,6 +70,8 @@ class TransportBuilder {
         $elements = $this->create_elements();
         if (!empty($elements)) {
             $cat->addMany($elements);
+        } else {
+            $this->log('Could not load elements (perhaps there are no snippets or plugins defined?)');
         }
         $attr = array(
             xPDOTransport::UNIQUE_KEY => 'category',
@@ -127,6 +131,8 @@ class TransportBuilder {
         // add docs (license, readme, etc) and pack the package
         $this->builder->setPackageAttributes($this->pkg_attributes());
         $this->builder->pack();
+
+        $this->log('TransportBuilder::make() finished.');
     }
 
 
