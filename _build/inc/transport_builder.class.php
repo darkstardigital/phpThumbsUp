@@ -51,7 +51,7 @@ class TransportBuilder {
         $this->modx->loadClass('transport.modPackageBuilder', '', false, true);
         $this->builder = new modPackageBuilder($this->modx);
         $this->builder->createPackage(PKG_NAME, PKG_VERSION, PKG_RELEASE);
-        $this->builder->registerNamespace(PKG_NAMESPACE, false, true, MODX_CORE_PATH . 'components/' . PKG_NAMESPACE . '/');
+        $this->builder->registerNamespace(PKG_NAMESPACE, false, true, '{core_path}components/' . PKG_NAMESPACE . '/');
     }
 
 
