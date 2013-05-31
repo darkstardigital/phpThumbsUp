@@ -1,5 +1,10 @@
 Changelog for phpThumbsUp component.
 
+
+phpThumbsUp 1.0.1
+================================================
+- Added server response headers for 304 and browser caching
+
 phpThumbsUp 1.0.0
 ================================================
 - Initial commit
