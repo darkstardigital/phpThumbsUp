@@ -316,12 +316,22 @@ class PhpThumbsUp {
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mime = finfo_file($finfo, $file);
         finfo_close($finfo);
+
+        $etag = md5_file($file);
+        $last_modified = gmstrftime('%a, %d %b %Y %T %Z', filemtime($file));
+        if (@strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $last_modified || trim($_SERVER['HTTP_IF_NONE_MATCH']) == $etag){
+            header($_SERVER['SERVER_PROTOCOL'].' 304 Not Modified');
+            return;
+        }
+
         header('Content-Type: ' . $mime);
         header('Content-Disposition: inline; filename=' . preg_replace('/\.[^.]+(\.[^.]+)$/', '$1', basename($file)));
         header('Content-Transfer-Encoding: binary');
         header('Cache-Control: public');
         header('Pragma: public');
         header('Content-Length: ' . filesize($file));
+        header('Etag: '.$etag);
+        header('Last-Modified: '.$last_modified);
         readfile($file);
     }
 
