@@ -75,9 +75,11 @@ class PhpThumbsUp {
      */
     public function clear_cache($force = false) {
         if ($force || $this->config['clearCache']) {
-            foreach (scandir($this->config['cachePath']) as $file) {
-                if ($file != '.' && $file != '..') {
-                    unlink($this->config['cachePath'] . $file);
+            if (is_dir($this->config('cachePath'))) {
+                foreach (scandir($this->config['cachePath']) as $file) {
+                    if ($file != '.' && $file != '..') {
+                        unlink($this->config['cachePath'] . $file);
+                    }
                 }
             }
         }
