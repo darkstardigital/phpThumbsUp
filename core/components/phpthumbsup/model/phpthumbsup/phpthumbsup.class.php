@@ -29,6 +29,8 @@ class PhpThumbsUp {
         $clear_cache = ($this->modx->getOption('phpthumbsup.clear_cache', $config, true) ? true : false);
 		$available_options = explode(',', trim($this->modx->getOption('phpthumbsup.available_options', $config, ''), ','));
 		$available_filters = explode(',', trim($this->modx->getOption('phpthumbsup.available_filters', $config, ''), ','));
+        $mobile = ($this->modx->getOption('phpthumbsup.mobile', $config, true) ? true : false);
+        $mobile_threshold = explode(',', trim($this->modx->getOption('phpthumbsup.mobile_threshold', $config, ''), ','));
         $this->config = array_merge(array(
             'basePath' => $base_path,
             'corePath' => $core_path,
@@ -38,7 +40,9 @@ class PhpThumbsUp {
             'autoCreate' => $auto_create,
             'clearCache' => $clear_cache,
 			'available_options' => $available_options,
-			'available_filters' => $available_filters
+			'available_filters' => $available_filters,
+            'mobile' => $mobile,
+            'mobile_threshold' => $mobile_threshold
         ), $config);
     }
 
@@ -169,7 +173,45 @@ class PhpThumbsUp {
                 $options[$option_args[$i]] = $option_args[$i + 1];
             }
         }
+        $options = $this->set_width_height($options);
         $options['src'] = urldecode($thumb_args[1]);
+        return $options;
+    }
+
+
+    /**
+     * Updates the width (w) and height (h) values in the options array to serve smaller image on mobile devices.
+     *
+     * Checks a cookie set by javascript that contains the screen width. If the screen width is less than a threshold
+     * value set in phpthumbsup.mobile_threshold then the width option is changed to that threshold. If a height was
+     * also specified in options it is updated proportionally to the width.
+     *
+     * @param array $options key/value options to be passed to modPhpThumb
+     * @return array key/value options to be passed to modPhpThumb
+     */
+    protected function set_width_height($options) {
+        if ($this->config('mobile') && !empty($this->config['mobile_threshold']) && $_COOKIE['dsdphptuwidth']) {
+            $threshold = 0;
+            foreach ($this->config['mobile_threshold'] as $w) {
+                if ($_COOKIE['dsdphptuwidth'] <= $w) {
+                    $threshold = $w;
+                    break;
+                }
+            }
+            if ($threshold) {
+                if (empty($options['w']) || $options['w'] > $threshold) {
+                    $orig_width = empty($options['w']) ? 0 : $options['w'];
+                    $options['w'] = $threshold;
+                    if (!empty($options['h'])) {
+                        if ($orig_width) {
+                            $options['h'] = $options['h'] * $threshold / $orig_width;
+                        } else {
+                            unset($options['h']);
+                        }
+                    }
+                }
+            }
+        }
         return $options;
     }
 
