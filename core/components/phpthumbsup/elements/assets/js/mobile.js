@@ -1,1 +1,1 @@
-(function(){document.cookie='dsdphptuwidth='+screen.width;});
+(function(){document.cookie='phptu.width='+screen.width;})();
