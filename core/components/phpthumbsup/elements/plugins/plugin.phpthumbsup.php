@@ -8,6 +8,7 @@
 
 // path to model
 $default_path = $modx->getOption('core_path') . 'components/phpthumbsup/';
+
 $path = $modx->getOption('phpthumbsup.core_path', NULL, $default_path) . 'model/phpthumbsup/';
 $thumbsup = $modx->getService('thumbsup', 'PhpThumbsUp', $path, $scriptProperties);
 $do_mobile_threshold = $modx->getOption('phpthumbsup.mobile');
