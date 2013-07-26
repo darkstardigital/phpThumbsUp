@@ -79,14 +79,14 @@ return array(
 	),
 	array(
         'key' => 'phpthumbsup.mobile',
-        'value' => 'w,h,wp,hp,wl,hl,ws,hs,f,q,sx,sy,sw,sh,zc,bg,bc,fltr,xto,ra,ar,sfn,aoe,iar,far,dpi,maxb',
+        'value' => true,
         'xtype' => 'textfield',
         'namespace' => 'phpthumbsup',
         'area' => 'general'
     ),
 	array(
         'key' => 'phpthumbsup.mobile_threshold',
-        'value' => '480,800',
+        'value' => '480,1024',
         'xtype' => 'textfield',
         'namespace' => 'phpthumbsup',
         'area' => 'general'
