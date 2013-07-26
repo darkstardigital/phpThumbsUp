@@ -37,7 +37,8 @@ return array(
             array('event' => 'OnFileManagerUpload', 'priority' => 0, 'propertyset' => 0),
             //array('event' => 'OnHandleRequest', 'priority' => 0, 'propertyset' => 0),
             array('event' => 'OnPageNotFound', 'priority' => 0, 'propertyset' => 0),
-            array('event' => 'OnSiteRefresh', 'priority' => 0, 'propertyset' => 0)
+            array('event' => 'OnSiteRefresh', 'priority' => 0, 'propertyset' => 0),
+            array('event' => 'OnLoadWebDocument', 'priority' => 0, 'propertyset' => 0),
         )
     )
 );

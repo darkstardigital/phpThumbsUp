@@ -10,6 +10,7 @@
 $default_path = $modx->getOption('core_path') . 'components/phpthumbsup/';
 $path = $modx->getOption('phpthumbsup.core_path', NULL, $default_path) . 'model/phpthumbsup/';
 $thumbsup = $modx->getService('thumbsup', 'PhpThumbsUp', $path, $scriptProperties);
+$is_mobile = $modx->getOption('phpthumbs.mobile');
 
 // make sure model loaded, if not log error and return
 if (!($thumbsup instanceof PhpThumbsUp)) {
@@ -34,6 +35,13 @@ switch ($modx->event->name) {
     // OnSiteRefresh delete phpthumbsup cache
     case 'OnSiteRefresh':
         $thumbsup->clear_cache();
+        break;
+
+    // OnLoadWebDocument add javascript
+    case 'OnLoadWebDocument':
+        if ($is_mobile){
+            $modx->regClientStartupScript($default_path . 'elements/assets/js/mobile.js');
+        }
         break;
 
     // if we didn't match an event just return null
