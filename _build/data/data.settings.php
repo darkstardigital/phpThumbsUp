@@ -80,7 +80,7 @@ return array(
 	array(
         'key' => 'phpthumbsup.mobile',
         'value' => true,
-        'xtype' => 'textfield',
+        'xtype' => 'combo-boolean',
         'namespace' => 'phpthumbsup',
         'area' => 'general'
     ),
