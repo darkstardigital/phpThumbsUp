@@ -1,0 +1,1 @@
+(function(){document.cookie='dsdphptuwidth='+screen.width;});
