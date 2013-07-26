@@ -37,14 +37,14 @@ return array(
     ),
     array(
         'key' => 'phpthumbsup.cache_path',
-        'value' => '{core_path}components/phpthumbsup/cache/',
+        'value' => '{core_path}cache/phpthumbsup/',
         'xtype' => 'textfield',
         'namespace' => 'phpthumbsup',
         'area' => 'paths'
     ),
     array(
         'key' => 'phpthumbsup.base_url',
-        'value' => 'phpthumbsup/',
+        'value' => '{base_url}phpthumbsup/',
         'xtype' => 'textfield',
         'namespace' => 'phpthumbsup',
         'area' => 'general'
