@@ -211,8 +211,6 @@ class PhpThumbsUp {
                     }
                 }
             }
-        } else {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, print_r($_COOKIE, true));
         }
         return $options;
     }
