@@ -169,7 +169,7 @@ class PhpThumbsUp {
                 $options[$option_args[$i]] = $option_args[$i + 1];
             }
         }
-        $options['src'] = $thumb_args[1];
+        $options['src'] = urldecode($thumb_args[1]);
         return $options;
     }
 
@@ -202,7 +202,7 @@ class PhpThumbsUp {
      * @return string absolute path to the thumbnail
      */
     protected function get_thumb_path($options) {
-        $filename = urldecode(basename($options['src']));
+        $filename = basename($options['src']);
         $ext = '';
         if (preg_match('/(.+)(\.[^.]+)$/', $filename, $m)) {
             $filename = $m[1];
