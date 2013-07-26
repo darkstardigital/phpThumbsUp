@@ -321,7 +321,7 @@ class PhpThumbsUp {
 
         $etag = md5_file($file);
         $last_modified = gmstrftime('%a, %d %b %Y %T %Z', filemtime($file));
-        if (@strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $last_modified || trim($_SERVER['HTTP_IF_NONE_MATCH']) == $etag) {
+        if (@strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $last_modified || $this->get_server_var('HTTP_IF_NONE_MATCH') == $etag) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
             return;
         }
@@ -355,5 +355,13 @@ class PhpThumbsUp {
 		}
 		return false;
 	}
+
+
+    protected function get_server_var($name, $default = false) {
+        if (isset($_SERVER[$name])) {
+            return trim($_SERVER[$name]);
+        }
+        return $default;
+    }
 
 }
