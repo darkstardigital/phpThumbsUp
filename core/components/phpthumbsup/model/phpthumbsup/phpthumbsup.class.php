@@ -190,7 +190,7 @@ class PhpThumbsUp {
      * @return array key/value options to be passed to modPhpThumb
      */
     protected function set_width_height($options) {
-        if ($this->config('mobile') && !empty($this->config['mobile_threshold']) && $_COOKIE['dsdphptuwidth']) {
+        if ($this->config['mobile'] && !empty($this->config['mobile_threshold']) && $_COOKIE['dsdphptuwidth']) {
             $threshold = 0;
             foreach ($this->config['mobile_threshold'] as $w) {
                 if ($_COOKIE['dsdphptuwidth'] <= $w) {
