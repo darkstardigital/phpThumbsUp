@@ -31,8 +31,8 @@ $_lang['setting_phpthumbsup.available_options_desc'] = 'A comma-separated list o
 $_lang['setting_phpthumbsup.available_filters'] = 'Available Filters';
 $_lang['setting_phpthumbsup.available_filters_desc'] = 'A comma-separated list of filters (fltr[]) that phpThumbsUp will recognize and process (see http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt for a full list of filters)';
 
-$_lang['setting_phpthumbsup.mobile'] = 'Mobile';
-$_lang['setting_phpthumbsup.mobile_desc'] = 'Create smaller images for mobile devices?';
+$_lang['setting_phpthumbsup.mobile'] = 'Mobile Enabled';
+$_lang['setting_phpthumbsup.mobile_desc'] = 'If enabled, phpThumbsUp will automatically limit image sizes by screen size by the specified thresholds.';
 
 $_lang['setting_phpthumbsup.mobile_threshold'] = 'Mobile Threshold';
-$_lang['setting_phpthumbsup.mobile_threshold_desc'] = 'Comma separated list of screen size threshold for creating mobile images.';
+$_lang['setting_phpthumbsup.mobile_threshold_desc'] = 'A comma-separated list of screen size thresholds for creating mobile-friendly images.';
