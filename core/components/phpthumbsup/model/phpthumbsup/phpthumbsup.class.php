@@ -191,12 +191,11 @@ class PhpThumbsUp {
      */
     protected function set_width_height($options) {
         $this->modx->log(modX::LOG_LEVEL_ERROR, 'set_width_height called');
-        $this->modx->log(modX::LOG_LEVEL_ERROR, print_r($_COOKIE, true));
-        if ($this->config['mobile'] && !empty($this->config['mobile_threshold']) && !empty($_COOKIE['phptu.width'])) {
+        if ($this->config['mobile'] && !empty($this->config['mobile_threshold']) && !empty($_COOKIE['phptu_width'])) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, 'mobile stuff happening');
             $threshold = 0;
             foreach ($this->config['mobile_threshold'] as $w) {
-                if ($_COOKIE['phptu.width'] <= $w) {
+                if ($_COOKIE['phptu_width'] <= $w) {
                     $threshold = $w;
                     break;
                 }
