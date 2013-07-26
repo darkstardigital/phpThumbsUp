@@ -41,7 +41,7 @@ switch ($modx->event->name) {
     // OnLoadWebDocument add javascript
     case 'OnLoadWebDocument':
         if ($do_mobile_threshold) {
-            $modx->regClientStartupScript(MODX_ASSETS_PATH . 'componenets/phpthumbsup/js/mobile.js');
+            $modx->regClientStartupScript(MODX_ASSETS_URL . 'componenets/phpthumbsup/js/mobile.js');
         }
         break;
 
