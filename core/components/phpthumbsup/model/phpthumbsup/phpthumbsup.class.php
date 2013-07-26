@@ -202,7 +202,7 @@ class PhpThumbsUp {
      * @return string absolute path to the thumbnail
      */
     protected function get_thumb_path($options) {
-        $filename = basename($options['src']);
+        $filename = urldecode(basename($options['src']));
         $ext = '';
         if (preg_match('/(.+)(\.[^.]+)$/', $filename, $m)) {
             $filename = $m[1];
@@ -321,7 +321,7 @@ class PhpThumbsUp {
 
         $etag = md5_file($file);
         $last_modified = gmstrftime('%a, %d %b %Y %T %Z', filemtime($file));
-        if (@strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $last_modified || $this->get_server_var('HTTP_IF_NONE_MATCH') == $etag) {
+        if (@strtotime($this->get_server_var('HTTP_IF_MODIFIED_SINCE')) == $last_modified || $this->get_server_var('HTTP_IF_NONE_MATCH') == $etag) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
             return;
         }
