@@ -4,6 +4,9 @@ Changelog for phpThumbsUp component.
 phpThumbsUp 1.0.1
 ================================================
 - Added server response headers for 304 and browser caching
+- Fixed issue with spaces in image path
+- Changed cache directory to reside in MODX cache directory
+- Changed phpthumbsup.base_url settings to include {base_url} at the beginning
 
 phpThumbsUp 1.0.0
 ================================================

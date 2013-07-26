@@ -319,8 +319,8 @@ class PhpThumbsUp {
 
         $etag = md5_file($file);
         $last_modified = gmstrftime('%a, %d %b %Y %T %Z', filemtime($file));
-        if (@strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $last_modified || trim($_SERVER['HTTP_IF_NONE_MATCH']) == $etag){
-            header($_SERVER['SERVER_PROTOCOL'].' 304 Not Modified');
+        if (@strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $last_modified || trim($_SERVER['HTTP_IF_NONE_MATCH']) == $etag) {
+            header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
             return;
         }
 
@@ -330,10 +330,11 @@ class PhpThumbsUp {
         header('Cache-Control: public');
         header('Pragma: public');
         header('Content-Length: ' . filesize($file));
-        header('Etag: '.$etag);
-        header('Last-Modified: '.$last_modified);
+        header('Etag: '. $etag);
+        header('Last-Modified: '. $last_modified);
         readfile($file);
     }
+
 
 	/**
 	 * Make sure the given option is available
