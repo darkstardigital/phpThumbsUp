@@ -1,6 +1,10 @@
 Changelog for phpThumbsUp component.
 
 
+phpThumbsUp 1.1.0
+================================================
+- Added screen width threshold for responsive design (see documentation for use).
+
 phpThumbsUp 1.0.1
 ================================================
 - Added server response headers for 304 and browser caching
