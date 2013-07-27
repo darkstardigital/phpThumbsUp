@@ -78,15 +78,22 @@ return array(
 		'area' => 'general'
 	),
 	array(
-        'key' => 'phpthumbsup.mobile',
+        'key' => 'phpthumbsup.responsive',
         'value' => true,
         'xtype' => 'combo-boolean',
         'namespace' => 'phpthumbsup',
         'area' => 'general'
     ),
 	array(
-        'key' => 'phpthumbsup.mobile_threshold',
+        'key' => 'phpthumbsup.responsive_threshold',
         'value' => '480,1024',
+        'xtype' => 'textfield',
+        'namespace' => 'phpthumbsup',
+        'area' => 'general'
+    ),
+    array(
+        'key' => 'phpthumbsup.default',
+        'value' => '',
         'xtype' => 'textfield',
         'namespace' => 'phpthumbsup',
         'area' => 'general'

@@ -11,7 +11,7 @@ $default_path = $modx->getOption('core_path') . 'components/phpthumbsup/';
 
 $path = $modx->getOption('phpthumbsup.core_path', NULL, $default_path) . 'model/phpthumbsup/';
 $thumbsup = $modx->getService('thumbsup', 'PhpThumbsUp', $path, $scriptProperties);
-$do_mobile_threshold = $modx->getOption('phpthumbsup.mobile');
+$do_responsive_threshold = $modx->getOption('phpthumbsup.responsive');
 
 // make sure model loaded, if not log error and return
 if (!($thumbsup instanceof PhpThumbsUp)) {
@@ -40,8 +40,8 @@ switch ($modx->event->name) {
 
     // OnLoadWebDocument add javascript
     case 'OnLoadWebDocument':
-        if ($do_mobile_threshold) {
-            $modx->regClientStartupScript(MODX_ASSETS_URL . 'components/phpthumbsup/js/mobile.js');
+        if ($do_responsive_threshold) {
+            $modx->regClientStartupScript(MODX_ASSETS_URL . 'components/phpthumbsup/js/responsive.js');
         }
         break;
 

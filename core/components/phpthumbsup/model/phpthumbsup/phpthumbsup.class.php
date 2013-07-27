@@ -29,8 +29,9 @@ class PhpThumbsUp {
         $clear_cache = ($this->modx->getOption('phpthumbsup.clear_cache', $config, true) ? true : false);
 		$available_options = explode(',', trim($this->modx->getOption('phpthumbsup.available_options', $config, ''), ','));
 		$available_filters = explode(',', trim($this->modx->getOption('phpthumbsup.available_filters', $config, ''), ','));
-        $mobile = ($this->modx->getOption('phpthumbsup.mobile', $config, true) ? true : false);
-        $mobile_threshold = explode(',', trim($this->modx->getOption('phpthumbsup.mobile_threshold', $config, ''), ','));
+        $responsive = ($this->modx->getOption('phpthumbsup.responsive', $config, true) ? true : false);
+        $responsive_threshold = explode(',', trim($this->modx->getOption('phpthumbsup.responsive_threshold', $config, ''), ','));
+        $default = $this->modx->getOption('phpthumbsup.default', $config, '');
         $this->config = array_merge(array(
             'basePath' => $base_path,
             'corePath' => $core_path,
@@ -41,8 +42,9 @@ class PhpThumbsUp {
             'clearCache' => $clear_cache,
 			'available_options' => $available_options,
 			'available_filters' => $available_filters,
-            'mobile' => $mobile,
-            'mobile_threshold' => $mobile_threshold
+            'responsive' => $responsive,
+            'responsive_threshold' => $responsive_threshold,
+            'default' => $default,
         ), $config);
     }
 
@@ -67,7 +69,7 @@ class PhpThumbsUp {
                 $path .= "/$opt";
             }
         }
-        $path .= "/src/$image";
+        if (strlen($image) > 0) $path .= "/src/$image";
         return $path;
     }
 
@@ -151,30 +153,51 @@ class PhpThumbsUp {
      * @return array key/value options to be passed to modPhpThumb
      */
     protected function get_options($url, $base_url) {
-        $options = array();
         $thumb_args = explode('/src/', trim(substr($url, strlen($base_url)), '/'));
         $option_args = explode('/', $thumb_args[0]);
+        $default_args = explode('/', $this->options_to_path('', $this->config['default']));
 		// since we're coming from $_REQUEST or an already decoded url specified by the user,
 		// we don't need to decode again (could cause security concerns)
         //
         // UPDATE: we need to use $_SERVER['REQUEST_URI'] and manually decode in case a filter
         //         contains a "/" in it, as we have to explode before urldecode
+        array_walk($default_args, array($this, 'decode_url'));
         array_walk($option_args, array($this, 'decode_url'));
-        for ($i = 0, $j = count($option_args) - 1;  $i < $j; $i += 2) {
-            // if a filter name ends with [] it is an array
-            if (preg_match('/(.+)\[\]$/', $option_args[$i], $m)) {
-				if ($this->is_available_option($m[1], $option_args[$i + 1])) {
-					if (!isset($options[$m[1]])) {
-						$options[$m[1]] = array();
-					}
-					$options[$m[1]][] = $option_args[$i + 1];
-				}
-            } else if ($this->is_available_option($option_args[$i], $option_args[$i + 1])) {
-                $options[$option_args[$i]] = $option_args[$i + 1];
-            }
-        }
+
+        $options = $this->parse_options($default_args, false);
+        $options = $this->parse_options($option_args, true, $options);
+
         $options = $this->set_width_height($options);
         $options['src'] = urldecode($thumb_args[1]);
+        return $options;
+    }
+
+    /**
+     * Turn a path array into an options array
+     *
+     * @param array     $path_array
+     * @param bool      $check_available
+     * @param array     $options
+     * @return array
+     */
+    protected function parse_options($path_array, $check_available = true, $options = array()) {
+        for ($i = 0, $j = count($path_array) - 1;  $i < $j; $i += 2) {
+            // if a filter name ends with [] it is an array
+            if (preg_match('/(.+)\[\]$/', $path_array[$i], $m)) {
+                if (!$check_available || $this->is_available_option($m[1], $path_array[$i + 1])) {
+                    // for array-type options (like filters), default values will not technically be overwritten by
+                    // passed options - they will be included side by side. This is because many of these filters
+                    // don't have a key/value, so it's hard to determine which filters should be overwritten
+                    if (!isset($options[$m[1]])) {
+                        $options[$m[1]] = array();
+                    }
+                    $options[$m[1]][] = $path_array[$i + 1];
+                }
+            } else if (!$check_available || $this->is_available_option($path_array[$i], $path_array[$i + 1])) {
+                $options[$path_array[$i]] = $path_array[$i + 1];
+            }
+        }
+
         return $options;
     }
 
@@ -183,16 +206,16 @@ class PhpThumbsUp {
      * Updates the width (w) and height (h) values in the options array to serve smaller image on mobile devices.
      *
      * Checks a cookie set by javascript that contains the screen width. If the screen width is less than a threshold
-     * value set in phpthumbsup.mobile_threshold then the width option is changed to that threshold. If a height was
+     * value set in phpthumbsup.responsive_threshold then the width option is changed to that threshold. If a height was
      * also specified in options it is updated proportionally to the width.
      *
      * @param array $options key/value options to be passed to modPhpThumb
      * @return array key/value options to be passed to modPhpThumb
      */
     protected function set_width_height($options) {
-        if ($this->config['mobile'] && !empty($this->config['mobile_threshold']) && !empty($_COOKIE['phptu_width'])) {
+        if ($this->config['responsive'] && !empty($this->config['responsive_threshold']) && !empty($_COOKIE['phptu_width'])) {
             $threshold = 0;
-            foreach ($this->config['mobile_threshold'] as $w) {
+            foreach ($this->config['responsive_threshold'] as $w) {
                 if ($_COOKIE['phptu_width'] <= $w) {
                     $threshold = $w;
                     break;

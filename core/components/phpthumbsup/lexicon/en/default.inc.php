@@ -31,8 +31,11 @@ $_lang['setting_phpthumbsup.available_options_desc'] = 'A comma-separated list o
 $_lang['setting_phpthumbsup.available_filters'] = 'Available Filters';
 $_lang['setting_phpthumbsup.available_filters_desc'] = 'A comma-separated list of filters (fltr[]) that phpThumbsUp will recognize and process (see http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt for a full list of filters)';
 
-$_lang['setting_phpthumbsup.mobile'] = 'Mobile Enabled';
-$_lang['setting_phpthumbsup.mobile_desc'] = 'If enabled, phpThumbsUp will automatically limit image sizes by screen size by the specified thresholds.';
+$_lang['setting_phpthumbsup.responsive'] = 'responsive Enabled';
+$_lang['setting_phpthumbsup.responsive_desc'] = 'If enabled, phpThumbsUp will automatically limit image sizes by screen size by the specified thresholds.';
 
-$_lang['setting_phpthumbsup.mobile_threshold'] = 'Mobile Threshold';
-$_lang['setting_phpthumbsup.mobile_threshold_desc'] = 'A comma-separated list of screen size thresholds for creating mobile-friendly images.';
+$_lang['setting_phpthumbsup.responsive_threshold'] = 'Responsive Threshold';
+$_lang['setting_phpthumbsup.responsive_threshold_desc'] = 'A comma-separated list of screen size thresholds for creating responsive images.';
+
+$_lang['setting_phpthumbsup.default'] = 'Default Thumb Settings';
+$_lang['setting_phpthumbsup.default_desc'] = 'If set, these settings will apply to all thumbs if not set specifically for that thumb. For example, you could set this to zc=1&fltr[]=gray to get zoom-cropped black and white images by default.';

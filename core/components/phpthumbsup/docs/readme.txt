@@ -93,11 +93,19 @@ There are system settings available to customize phpThumbsUp to your needs. As
 a general rule, DO NOT edit the path settings unless you are an advanced user
 of MODX and have a customized installation.
 
-* phpthumbsup.auto_create - colon separated list of directories using
-                            phpThumbsUp URL format
-* phpthumbsup.base_url    - the first part of phpThumbsUp URL (default:
-                            phpthumbsup/)
-* phpthumbsup.clear_cache - should thumbnail cache be cleared when site cache
-                            is cleared? (default: yes)
-* phpthumbsup.cache_path  - the path to the phpThumbsUp cache
-* phpthumbsup.core_path   - the core path to phpThumbsUp
+* phpthumbsup.auto_create       - colon separated list of directories using
+                                    phpThumbsUp URL format
+* phpthumbsup.base_url          - the first part of phpThumbsUp URL (default:
+                                    phpthumbsup/)
+* phpthumbsup.clear_cache       - should thumbnail cache be cleared when site
+                                    cache is cleared? (default: yes)
+* phpthumbsup.cache_path        - the path to the phpThumbsUp cache
+* phpthumbsup.core_path         - the core path to phpThumbsUp
+* phpthumbsup.available_options - a comma-separated list of available options
+* phpthumbsup.available_filters - a comma-separated list of available filters
+* phpthumbsup.responsive        - if set, phpthumbsup will try to limit image
+                                    sizes to device screensize based on your
+                                    thresholds
+* phpthumbsup.responsive_threshold - a comma-separated list of thresholds to
+                                     for devices
+* phpthumbsup.default           - default settings for all thumbs
