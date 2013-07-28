@@ -79,7 +79,7 @@ return array(
 	),
 	array(
         'key' => 'phpthumbsup.responsive',
-        'value' => true,
+        'value' => false,
         'xtype' => 'combo-boolean',
         'namespace' => 'phpthumbsup',
         'area' => 'general'
