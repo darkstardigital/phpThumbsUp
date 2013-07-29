@@ -4,8 +4,9 @@ Changelog for phpThumbsUp component.
 phpThumbsUp 1.1.0
 ================================================
 - Added screen width threshold for responsive design.
-- Added "default" setting for phpThumb parameters that should apply to all thumbs
-  by default
+- Added "default" setting for phpThumbsUp parameters that should apply to all
+  images by default
+- Changed phpThumbsUp to work with only a src and no options
 
 phpThumbsUp 1.0.1
 ================================================
