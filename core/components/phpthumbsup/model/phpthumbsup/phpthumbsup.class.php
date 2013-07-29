@@ -69,7 +69,9 @@ class PhpThumbsUp {
                 $path .= "/$opt";
             }
         }
-        if (strlen($image) > 0) $path .= '/src/' . ltrim($image, '/');
+        if (!empty($image)) {
+            $path .= '/src/' . ltrim($image, '/');
+        }
         return $path;
     }
 
