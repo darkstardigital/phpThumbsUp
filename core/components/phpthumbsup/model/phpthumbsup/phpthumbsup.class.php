@@ -59,14 +59,16 @@ class PhpThumbsUp {
      * @return string a phpThumbsUp url for a thumbnail
      */
     public function options_to_path($image, $options) {
-        $path = strlen($image) > 0 ? rtrim($this->config['baseUrl'], '/') : '';
-        $options = explode('&', $options);
-        array_walk($options, array($this, 'encode_url'));
-        foreach ($options as $opt) {
-            if (substr($opt, 0, 4) == 'src/') {
-                $image = substr($opt, 4);
-            } else {
-                $path .= "/$opt";
+        $path = !empty($image) ? rtrim($this->config['baseUrl'], '/') : '';
+        if (!empty($options)) {
+            $options = explode('&', $options);
+            array_walk($options, array($this, 'encode_url'));
+            foreach ($options as $opt) {
+                if (substr($opt, 0, 4) == 'src/') {
+                    $image = substr($opt, 4);
+                } else {
+                    $path .= "/$opt";
+                }
             }
         }
         if (!empty($image)) {
@@ -138,9 +140,13 @@ class PhpThumbsUp {
             $base_url = ltrim($this->config['baseUrl'], '/');
             if (strpos($url, $base_url) === 0) {
                 $options = $this->get_options($url, $base_url);
-                $path = $this->get_thumb_path($options);
-                $this->create_thumb($path, $options);
-                $this->display($path);
+                if (count($options) == 1 && !empty($options['src'])) {
+                    $this->display($options['src']);
+                } else {
+                    $path = $this->get_thumb_path($options);
+                    $this->create_thumb($path, $options);
+                    $this->display($path);
+                }
                 exit;
             }
         }
@@ -170,9 +176,16 @@ class PhpThumbsUp {
         $options = $this->parse_options($default_args, false);
         $options = $this->parse_options($option_args, true, $options);
         $options = $this->set_width_height($options);
-        $options['src'] = urldecode($thumb_args[1]);
+        // NOTE: v1.1.0 allows a thumbsup url to contain only a src with no options. so we can
+        // no longer assume exploding on /src/ will give us the src in $thumb_args[1]
+        if (count($thumb_args) == 1) {
+            $options['src'] = urldecode(preg_replace(':^/?src/?:', '', $thumb_args[0]));
+        } else {
+            $options['src'] = urldecode($thumb_args[1]);
+        }
         return $options;
     }
+
 
     /**
      * Turn a path array into an options array
@@ -428,6 +441,13 @@ class PhpThumbsUp {
 	}
 
 
+    /**
+     * Returns the value of a $_SERVER variable
+     *
+     * @param $name name of the $_SERVER variable
+     * @param bool $default returned if the variable is not set
+     * @return bool|string the value of the variable
+     */
     protected function get_server_var($name, $default = false) {
         if (isset($_SERVER[$name])) {
             return trim($_SERVER[$name]);

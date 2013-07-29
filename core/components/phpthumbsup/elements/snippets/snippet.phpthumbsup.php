@@ -17,7 +17,7 @@ $path = $modx->getOption('phpthumbsup.core_path', NULL, $default_path) . 'model/
 $thumbsup = $modx->getService('thumbsup', 'PhpThumbsUp', $path, $scriptProperties);
 
 // make sure we have an image and options
-if (!empty($image) && !empty($options)) {
+if (!empty($image)) {
     $image = $thumbsup->options_to_path($image, $options);
 }
 
