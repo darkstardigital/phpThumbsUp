@@ -255,8 +255,11 @@ class PhpThumbsUp {
      */
     protected function encode_url(&$val) {
         $parts = explode('=', $val);
-        array_walk($parts, 'urlencode');
-        $val = implode('/', $parts);
+        $encoded = '';
+        foreach ($parts as $part) {
+            $encoded .= "/$part";
+        }
+        $val = ltrim($encoded, '/');
     }
 
 
