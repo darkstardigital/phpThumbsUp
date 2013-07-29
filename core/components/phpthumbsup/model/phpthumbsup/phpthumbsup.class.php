@@ -59,7 +59,7 @@ class PhpThumbsUp {
      * @return string a phpThumbsUp url for a thumbnail
      */
     public function options_to_path($image, $options) {
-        $path = rtrim($this->config['baseUrl'], '/');
+        $path = strlen($image) > 0 ? rtrim($this->config['baseUrl'], '/') : '';
         $options = explode('&', $options);
         array_walk($options, array($this, 'encode_url'));
         foreach ($options as $opt) {
@@ -155,7 +155,8 @@ class PhpThumbsUp {
     protected function get_options($url, $base_url) {
         $thumb_args = explode('/src/', trim(substr($url, strlen($base_url)), '/'));
         $option_args = explode('/', $thumb_args[0]);
-        $default_args = explode('/', $this->options_to_path('', $this->config['default']));
+		$default_path = ltrim($this->options_to_path('', $this->config['default']), '/');
+        $default_args = explode('/', $default_path);
 
 		// since we're coming from $_REQUEST or an already decoded url specified by the user,
 		// we don't need to decode again (could cause security concerns)
