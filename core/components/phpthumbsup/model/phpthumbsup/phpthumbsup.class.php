@@ -158,21 +158,16 @@ class PhpThumbsUp {
         $thumb_args = explode('/src/', trim(substr($url, strlen($base_url)), '/'));
         $option_args = explode('/', $thumb_args[0]);
         $default_args = explode('/', $this->options_to_path('', $this->config['default']));
+
 		// since we're coming from $_REQUEST or an already decoded url specified by the user,
 		// we don't need to decode again (could cause security concerns)
         //
         // UPDATE: we need to use $_SERVER['REQUEST_URI'] and manually decode in case a filter
         //         contains a "/" in it, as we have to explode before urldecode
-        if (!empty($default_args)) {
-            array_walk($default_args, array($this, 'decode_url'));
-            $options = $this->parse_options($default_args, false);
-        } else {
-            $options = array();
-        }
-
+        array_walk($default_args, array($this, 'decode_url'));
         array_walk($option_args, array($this, 'decode_url'));
+        $options = $this->parse_options($default_args, false);
         $options = $this->parse_options($option_args, true, $options);
-
         $options = $this->set_width_height($options);
         $options['src'] = urldecode($thumb_args[1]);
         return $options;
