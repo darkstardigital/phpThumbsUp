@@ -18,12 +18,19 @@ Key Features
 
 * System setting to create thumbnails when an image is uploaded via the file
   manager instead of on page render.
+
+* Optional support for responsive layouts. If enabled, smaller images will be
+  served for devices with smaller screen sizes (phones, tablets, etc).
+
 * System setting to clear the phpThumbsUp cache when the site cache is cleared.
+
 * Creates thumbnails via a plugin rather then a snippet, meaning a page does
   not have to wait on a thumbnail to be created before it is displayed.
+
 * Thumbnails are created based on URLs (i.e.
   mysite.com/phpthumbsup/w/400/h/300/zc/1/src/path/to/image.jpg) instead of
   snippet calls, making it easy to dynamically create thumbnails on the fly.
+
 * For a full list of features, see
   http://www.darkstardesign.com/resources/phpthumbsup
 
@@ -84,6 +91,19 @@ Example (notice you DO NOT include the /phpthumbsup part at the beginning):
 This would create thumbnails 400x300 and 800xAuto anytime an image is uploaded
 to /path/to/dir (relative to site root)
 
+*** Responsive Layouts ***
+
+Starting with version 1.1.0, phpThumbsUp has an optional setting to detect the
+screen size of the device being used when requesting a thumb and generate
+smaller images for devices with smaller screen sizes. Javascript is used to
+store the client's screen size. When an image is requested, phpThumbsUp will
+check the clients screen size and automatically adjust the width/height of the
+image based on thresholds defined in the setting phpthumbsup.responsive_threshold.
+For example, the default thresholds are 480 and 1024. So if the client is using
+a phone with a screen size of 320 pixels and an image was requested with a width
+of 800, phpThumbsUp will adjust the width to 480 (the closest threshold value
+greater than or equal to screen size).
+
 
 ----------------------
 System Settings
@@ -93,19 +113,38 @@ There are system settings available to customize phpThumbsUp to your needs. As
 a general rule, DO NOT edit the path settings unless you are an advanced user
 of MODX and have a customized installation.
 
-* phpthumbsup.auto_create       - colon separated list of directories using
-                                    phpThumbsUp URL format
-* phpthumbsup.base_url          - the first part of phpThumbsUp URL (default:
-                                    phpthumbsup/)
-* phpthumbsup.clear_cache       - should thumbnail cache be cleared when site
-                                    cache is cleared? (default: yes)
-* phpthumbsup.cache_path        - the path to the phpThumbsUp cache
-* phpthumbsup.core_path         - the core path to phpThumbsUp
-* phpthumbsup.available_options - a comma-separated list of available options
-* phpthumbsup.available_filters - a comma-separated list of available filters
-* phpthumbsup.responsive        - if set, phpthumbsup will try to limit image
-                                    sizes to device screensize based on your
-                                    thresholds
-* phpthumbsup.responsive_threshold - a comma-separated list of thresholds to
-                                     for devices
-* phpthumbsup.default           - default settings for all thumbs
+* phpthumbsup.auto_create
+  - colon separated list of directories using phpThumbsUp URL format
+    example: /w/400/h/300/zc/1/src/assets/images/gallery
+    (this creates a thumb zoom-cropped to 400x300 anytime an image is uploaded
+    to /assets/images/gallery)
+
+* phpthumbsup.base_url
+  - the first part of phpThumbsUp URL (default: phpthumbsup/)
+
+* phpthumbsup.clear_cache
+  - should thumbnail cache be cleared when site cache is cleared? (default: yes)
+
+* phpthumbsup.cache_path
+  - the path to the phpThumbsUp cache
+
+* phpthumbsup.core_path
+  - the core path to phpThumbsUp
+
+* phpthumbsup.available_options
+  - a comma-separated list of available options
+
+* phpthumbsup.available_filters
+  - a comma-separated list of available filters
+
+* phpthumbsup.responsive
+  - if set, phpthumbsup will try to limit image sizes to device screen size based
+    on your thresholds
+
+* phpthumbsup.responsive_threshold
+  - a comma-separated list of thresholds for device screen sizes
+
+* phpthumbsup.default
+  - default settings for all thumbs
+    example: zc=1&fltr[]=gray
+    (all images are zoom-cropped and converted to black and white by default)

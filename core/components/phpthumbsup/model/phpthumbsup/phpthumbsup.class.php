@@ -43,7 +43,7 @@ class PhpThumbsUp {
 			'available_options' => $available_options,
 			'available_filters' => $available_filters,
             'responsive' => $responsive,
-            'responsive_threshold' => $responsive_threshold,
+            'responsiveThreshold' => $responsive_threshold,
             'default' => $default,
         ), $config);
     }
@@ -206,16 +206,16 @@ class PhpThumbsUp {
      * Updates the width (w) and height (h) values in the options array to serve smaller image on mobile devices.
      *
      * Checks a cookie set by javascript that contains the screen width. If the screen width is less than a threshold
-     * value set in phpthumbsup.responsive_threshold then the width option is changed to that threshold. If a height was
+     * value set in phpthumbsup.responsiveThreshold then the width option is changed to that threshold. If a height was
      * also specified in options it is updated proportionally to the width.
      *
      * @param array $options key/value options to be passed to modPhpThumb
      * @return array key/value options to be passed to modPhpThumb
      */
     protected function set_width_height($options) {
-        if ($this->config['responsive'] && !empty($this->config['responsive_threshold']) && !empty($_COOKIE['phptu_width'])) {
+        if ($this->config['responsive'] && !empty($this->config['responsiveThreshold']) && !empty($_COOKIE['phptu_width'])) {
             $threshold = 0;
-            foreach ($this->config['responsive_threshold'] as $w) {
+            foreach ($this->config['responsiveThreshold'] as $w) {
                 if ($_COOKIE['phptu_width'] <= $w) {
                     $threshold = $w;
                     break;
