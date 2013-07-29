@@ -261,6 +261,7 @@ class PhpThumbsUp {
      * @param string $val reference to array element
      */
     protected function encode_url(&$val) {
+        $this->modx->log(modX::LOG_LEVEL_ERROR, $val);
         list($n, $v) = explode('=', $val);
         $val = urlencode($n) . '/' . urlencode($v);
     }
