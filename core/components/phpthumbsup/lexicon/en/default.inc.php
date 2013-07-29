@@ -31,7 +31,7 @@ $_lang['setting_phpthumbsup.available_options_desc'] = 'A comma-separated list o
 $_lang['setting_phpthumbsup.available_filters'] = 'Available Filters';
 $_lang['setting_phpthumbsup.available_filters_desc'] = 'A comma-separated list of filters (fltr[]) that phpThumbsUp will recognize and process (see http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt for a full list of filters)';
 
-$_lang['setting_phpthumbsup.responsive'] = 'responsive Enabled';
+$_lang['setting_phpthumbsup.responsive'] = 'Responsive Enabled';
 $_lang['setting_phpthumbsup.responsive_desc'] = 'If enabled, phpThumbsUp will automatically limit image sizes by screen size by the specified thresholds.';
 
 $_lang['setting_phpthumbsup.responsive_threshold'] = 'Responsive Threshold';
