@@ -69,9 +69,7 @@ class PhpThumbsUp {
                 $path .= "/$opt";
             }
         }
-        if (!empty($image)) {
-            $path .= '/src/' . trim($image, '/');
-        }
+        if (strlen($image) > 0) $path .= '/src/' . ltrim($image, '/');
         return $path;
     }
 
@@ -256,9 +254,9 @@ class PhpThumbsUp {
      * @param string $val reference to array element
      */
     protected function encode_url(&$val) {
-        $this->modx->log(modX::LOG_LEVEL_ERROR, $val);
-        list($n, $v) = explode('=', $val);
-        $val = urlencode($n) . '/' . urlencode($v);
+        $parts = explode('=', $val);
+        array_walk($parts, 'urlencode');
+        $val = implode('/', $parts);
     }
 
 
