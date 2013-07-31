@@ -13,5 +13,5 @@ define('MODX_CONFIG_KEY', 'config');
 // package config
 define('PKG_NAME', 'phpThumbsUp');
 define('PKG_NAMESPACE', 'phpthumbsup');
-define('PKG_VERSION', '1.1.0');
+define('PKG_VERSION', '1.1.1');
 define('PKG_RELEASE', 'pl');

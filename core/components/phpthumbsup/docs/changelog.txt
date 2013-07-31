@@ -1,5 +1,9 @@
 Changelog for phpThumbsUp component.
 
+phpThumbsUp 1.1.1
+================================================
+- Added a parse_path method for converting {core_path}, {assets_path} or
+  {base_path} in setting values to actual paths (fixes caching issue).
 
 phpThumbsUp 1.1.0
 ================================================
