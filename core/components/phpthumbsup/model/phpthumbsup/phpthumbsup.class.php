@@ -33,10 +33,10 @@ class PhpThumbsUp {
         $responsive_threshold = explode(',', trim($this->modx->getOption('phpthumbsup.responsive_threshold', $config, ''), ','));
         $default = $this->modx->getOption('phpthumbsup.default', $config, '');
         $this->config = array_merge(array(
-            'basePath' => $base_path,
-            'corePath' => $core_path,
-            'modelPath' => $core_path . 'model/',
-            'cachePath' => $cache_path,
+            'basePath' => $this->parse_path($base_path),
+            'corePath' => $this->parse_path($core_path),
+            'modelPath' => $this->parse_path($core_path) . 'model/',
+            'cachePath' => $this->parse_path($cache_path),
             'baseUrl' => $base_url,
             'autoCreate' => $auto_create,
             'clearCache' => $clear_cache,
@@ -47,6 +47,21 @@ class PhpThumbsUp {
             'default' => $default,
         ), $config);
     }
+
+	/**
+	 * Convert shortcuts like {core_path} into real path values
+	 *
+	 * @param $path
+	 *
+	 * @return mixed
+	 */
+	protected function parse_path($path) {
+		$path = str_replace('{core_path}', MODX_CORE_PATH, $path);
+		$path = str_replace('{base_path}', MODX_BASE_PATH, $path);
+		$path = str_replace('{assets_path}', MODX_ASSETS_PATH, $path);
+
+		return $path;
+	}
 
 
     /**
@@ -85,7 +100,7 @@ class PhpThumbsUp {
      */
     public function clear_cache($force = false) {
         if ($force || $this->config['clearCache']) {
-            if (is_dir($this->config('cachePath'))) {
+            if (is_dir($this->config['cachePath'])) {
                 foreach (scandir($this->config['cachePath']) as $file) {
                     if ($file != '.' && $file != '..') {
                         unlink($this->config['cachePath'] . $file);
