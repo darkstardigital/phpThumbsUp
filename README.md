@@ -4,7 +4,7 @@ phpThumbsUp
 ----------------------
 Extra: phpThumbsUp
 ----------------------
-Version: 1.1.0
+Version: 1.1.1
 Developed By: Darkstar Design (info@darkstardesign.com)
 
 phpThumbsUp is a MODX addon that manipulates source images to create thumbnails.
