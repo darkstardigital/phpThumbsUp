@@ -419,8 +419,9 @@ class PhpThumbsUp {
         finfo_close($finfo);
 
         $etag = md5_file($file);
-        $last_modified = gmstrftime('%a, %d %b %Y %T %Z', filemtime($file));
-        if (@strtotime($this->get_server_var('HTTP_IF_MODIFIED_SINCE')) == $last_modified || $this->get_server_var('HTTP_IF_NONE_MATCH') == $etag) {
+        $mtime = filemtime($file);
+        $last_modified = gmstrftime('%a, %d %b %Y %T %Z', $mtime);
+        if (@strtotime($this->get_server_var('HTTP_IF_MODIFIED_SINCE')) == $mtime || $this->get_server_var('HTTP_IF_NONE_MATCH') == $etag) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
             return;
         }
