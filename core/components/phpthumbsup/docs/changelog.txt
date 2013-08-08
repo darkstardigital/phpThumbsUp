@@ -2,7 +2,8 @@ Changelog for phpThumbsUp component.
 
 phpThumbsUp 1.1.2
 ================================================
-- Fixed 304 header being sent for HTTP_IF_MODIFIED_SINCE header
+- Fixed 304 header being sent for HTTP_IF_MODIFIED_SINCE header.
+- Expires header wont be set by default.
 
 phpThumbsUp 1.1.1
 ================================================

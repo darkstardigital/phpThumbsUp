@@ -434,6 +434,10 @@ class PhpThumbsUp {
         header('Content-Length: ' . filesize($file));
         header('Etag: '. $etag);
         header('Last-Modified: '. $last_modified);
+
+        // Expires shouldn't be set by default
+        header_remove('Expires');
+
         readfile($file);
     }
 
