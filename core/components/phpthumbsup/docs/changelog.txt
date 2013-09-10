@@ -4,6 +4,8 @@ phpThumbsUp 1.1.2
 ================================================
 - Fixed 304 header being sent for HTTP_IF_MODIFIED_SINCE header.
 - Expires header wont be set by default.
+- Added fall-backs for getting file mime types.
+- Switched last modified time to use a format with better support on Windows and Mac OS X implementation.
 
 phpThumbsUp 1.1.1
 ================================================
