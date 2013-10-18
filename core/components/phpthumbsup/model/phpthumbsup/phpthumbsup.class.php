@@ -450,7 +450,9 @@ class PhpThumbsUp {
         header('Last-Modified: '. $last_modified);
 
         // Expires shouldn't be set by default
-        header_remove('Expires');
+        if (function_exists('header_remove')) {
+            header_remove('Expires');
+        }
 
         readfile($file);
     }
