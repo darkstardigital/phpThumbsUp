@@ -29,6 +29,8 @@ class PhpThumbsUp {
         $clear_cache = ($this->modx->getOption('phpthumbsup.clear_cache', $config, true) ? true : false);
 		$available_options = explode(',', trim($this->modx->getOption('phpthumbsup.available_options', $config, ''), ','));
 		$available_filters = explode(',', trim($this->modx->getOption('phpthumbsup.available_filters', $config, ''), ','));
+		$available_widths = explode(',', trim($this->modx->getOption('phpthumbsup.available_widths', $config, ''), ','));
+                $available_heights = explode(',', trim($this->modx->getOption('phpthumbsup.available_heights', $config, ''), ','));
         $responsive = ($this->modx->getOption('phpthumbsup.responsive', $config, true) ? true : false);
         $responsive_threshold = explode(',', trim($this->modx->getOption('phpthumbsup.responsive_threshold', $config, ''), ','));
         $default = $this->modx->getOption('phpthumbsup.default', $config, '');
@@ -42,6 +44,8 @@ class PhpThumbsUp {
             'clearCache' => $clear_cache,
 			'available_options' => $available_options,
 			'available_filters' => $available_filters,
+			'available_widths' => $available_widths,
+			'available_heights' => $available_heights,
             'responsive' => $responsive,
             'responsiveThreshold' => $responsive_threshold,
             'default' => $default,
@@ -468,6 +472,13 @@ class PhpThumbsUp {
 			if ($option === 'fltr') {
 				$filter = explode('|', $value);
 				return count($filter) > 0 && in_array($filter[0], $this->config['available_filters']);
+			}
+			// return false if widths and heights are not in available options
+			if ($option === 'w') {
+			    if (!in_array($value,$this->config['available_widths'])) return false;
+			}
+			if ($option === 'h') {
+			    if (!in_array($value,$this->config['available_heights'])) return false;
 			}
 			return true;
 		}

@@ -97,5 +97,19 @@ return array(
         'xtype' => 'textfield',
         'namespace' => 'phpthumbsup',
         'area' => 'general'
+    ),
+    array(
+    	'key' => 'phpthumbsup.available_widths',
+    	'value' => '',
+    	'xtype' => 'textfield',
+    	'namespace' => 'phpthumbsup',
+    	'area' => 'general'
+    ),
+    array(
+    	'key' => 'phpthumbsup.available_heights',
+    	'value' => '',
+    	'xtype' => 'textfield',
+    	'namespace' => 'phpthumbsup',
+    	'area' => 'general'
     )
 );
