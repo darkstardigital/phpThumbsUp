@@ -29,7 +29,7 @@ class PhpThumbsUp {
         $clear_cache = ($this->modx->getOption('phpthumbsup.clear_cache', $config, true) ? true : false);
 		$available_options = explode(',', trim($this->modx->getOption('phpthumbsup.available_options', $config, ''), ','));
 		$available_filters = explode(',', trim($this->modx->getOption('phpthumbsup.available_filters', $config, ''), ','));
-                $available_widths = explode(',', trim($this->modx->getOption('phpthumbsup.available_widths', $config, ''), ','));
+		$available_widths = explode(',', trim($this->modx->getOption('phpthumbsup.available_widths', $config, ''), ','));
                 $available_heights = explode(',', trim($this->modx->getOption('phpthumbsup.available_heights', $config, ''), ','));
         $responsive = ($this->modx->getOption('phpthumbsup.responsive', $config, true) ? true : false);
         $responsive_threshold = explode(',', trim($this->modx->getOption('phpthumbsup.responsive_threshold', $config, ''), ','));
@@ -411,20 +411,35 @@ class PhpThumbsUp {
         return true;
     }
 
+    /***
+     * @param $file
+     * @return string
+     */
+    protected function get_mime_type($file){
+        if (function_exists('finfo_file')){
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mime = finfo_file($finfo, $file);
+            finfo_close($finfo);
+        } else if (function_exists('exif_imagetype')) {
+            $mime = image_type_to_mime_type(exif_imagetype($file));
+        } else {
+            $type = getimagesize($file);
+            $mime = image_type_to_mime_type($type[2]);
+        }
+        return $mime;
+    }
 
     /**
      * Displays the thumbnail provided.
      *
-     * @param $file absolute path to the thumbnail
+     * @param string $file absolute path to the thumbnail
      */
     protected function display($file) {
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mime = finfo_file($finfo, $file);
-        finfo_close($finfo);
-
+        $mime = $this->get_mime_type($file);
         $etag = md5_file($file);
-        $last_modified = gmstrftime('%a, %d %b %Y %T %Z', filemtime($file));
-        if (@strtotime($this->get_server_var('HTTP_IF_MODIFIED_SINCE')) == $last_modified || $this->get_server_var('HTTP_IF_NONE_MATCH') == $etag) {
+        $mtime = filemtime($file);
+        $last_modified = gmstrftime('%a, %d %b %Y %H:%M:%S %Z', $mtime);
+        if (@strtotime($this->get_server_var('HTTP_IF_MODIFIED_SINCE')) == $mtime || $this->get_server_var('HTTP_IF_NONE_MATCH') == $etag) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
             return;
         }
@@ -437,6 +452,10 @@ class PhpThumbsUp {
         header('Content-Length: ' . filesize($file));
         header('Etag: '. $etag);
         header('Last-Modified: '. $last_modified);
+
+        // Expires shouldn't be set by default
+        header_remove('Expires');
+
         readfile($file);
     }
 
@@ -470,7 +489,7 @@ class PhpThumbsUp {
     /**
      * Returns the value of a $_SERVER variable
      *
-     * @param $name name of the $_SERVER variable
+     * @param string $name name of the $_SERVER variable
      * @param bool $default returned if the variable is not set
      * @return bool|string the value of the variable
      */
