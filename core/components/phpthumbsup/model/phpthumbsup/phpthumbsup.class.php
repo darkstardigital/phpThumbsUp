@@ -153,6 +153,15 @@ class PhpThumbsUp {
             //$url = ltrim($_REQUEST['q'], '/');
             $url = ltrim($_SERVER['REQUEST_URI'], '/');
             $base_url = ltrim($this->config['baseUrl'], '/');
+            
+            // when base url contains http(s):// url
+            if(stripos($base_url, 'http') === 0) {
+                $base_url = str_replace(array('http://','https://'), '', $base_url);
+                if(stripos($base_url, $_SERVER['HTTP_HOST']) === 0) {
+                    $base_url = ltrim(str_replace($_SERVER['HTTP_HOST'], '', $base_url), '/');
+                }
+            }
+            
             if (strpos($url, $base_url) === 0) {
                 $options = $this->get_options($url, $base_url);
                 if (count($options) == 1 && !empty($options['src'])) {
